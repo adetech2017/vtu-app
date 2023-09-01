@@ -1,0 +1,52 @@
+/* components/SearchBar.css */
+
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.search-input {
+    /* padding: 12px;
+    border: 2px solid #007BFF;
+    margin-right: 10px;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    font-size: 16px;
+    width: 300px; */
+    padding: 6px 12px;
+    margin-right: 10px;
+    background: rgb(31, 32, 35);
+    border: 1px solid rgb(60, 63, 68);
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgb(247, 248, 248);
+    height: 26px;
+    appearance: none;
+    width: 300px;
+    transition: border 0.15s ease 0s;
+    :focus{
+        outline: none;
+        box-shadow: none;
+        border-color: rgb(100, 153, 255);
+    }
+}
+
+.search-button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: 2px solid #007BFF;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Optional: Hover effect for the search button */
+.search-button:hover {
+    background-color: #0056b3;
+}
+

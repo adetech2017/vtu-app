@@ -1,0 +1,379 @@
+import React, { useState, useEffect } from 'react'
+import { Link, Route, Routes, Switch } from 'react-router-dom';
+import Header from '../src/components/common/header/Header'
+import Footer from '../src/components/common/footer/Footer'
+import Slider from './components/home/slider/Slider'
+import SearchBar from './components/home/slider/SearchBar';
+import ProductList from './components/products/ProductList';
+import getAuthToken from './apiAuth';
+import { 
+    Accordion,
+    AccordionSummary, 
+    AccordionDetails,
+    Typography,
+    Button ,
+    Card,
+    CardContent,
+    CardHeader,
+    Grid,
+    IconButton,
+} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMoreRounded';
+import LanguageIcon from '@mui/icons-material/Language';
+import SingleProductPage from './components/SingleProductPage';
+import ProductPage from './components/ProductPage';
+
+
+
+
+const API_URL = 'https://sandbox.worldroambuddy.com:3001/api/v1/products/all';
+
+const App = () => {
+    const [countriesProducts, setCountriesProducts] = useState([]);
+    const [regionsProducts, setRegionsProducts] = useState([]);
+    const [globalPlanProducts, setGlobalPlanProducts] = useState([]);
+    const [activeTab, setActiveTab] = useState('countries');
+    
+    const [openAccordion, setOpenAccordion] = useState(null);
+    const [showHiddenContent, setShowHiddenContent] = useState(false); // State to control hidden content visibility
+    const ITEMS_PER_PAGE = 16;
+    
+    //const history = useHistory();
+
+
+    const [displayedProductsCount, setDisplayedProductsCount] = useState(ITEMS_PER_PAGE);
+
+    const handleAccordionClick = (accordionName) => {
+        if (accordionName === openAccordion) {
+            setOpenAccordion(null);
+        } else {
+            setOpenAccordion(accordionName);
+        }
+    };
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const authToken = await getAuthToken();
+                const response = await fetch(API_URL, {
+                    headers: {
+                        'Authorization': authToken,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+
+                const responseData = await response.json();
+                console.log('API response:', responseData);
+
+                if (responseData.code === 200 && Array.isArray(responseData.data)) {
+                    const regionalProducts = responseData.data.filter(product => product.isRegional);
+                    const countryProducts = responseData.data.filter(product => !product.isRegional && product.countries.length > 0);
+                    const globalPlanProducts = responseData.data.filter(product => !product.isRegional && product.global_plan);
+                    
+                    //console.log('Global products:', globalPlanProducts);
+
+                    // Group regional products by region
+                    const groupedProducts = {};
+                    regionalProducts.forEach(product => {
+                        const region = product.region;
+                        if (!groupedProducts[region]) {
+                            groupedProducts[region] = [];
+                        }
+                        groupedProducts[region].push(product);
+                    });
+                    setRegionsProducts(groupedProducts);
+
+                    // Group country products by country
+                    const groupedCountryProducts = {};
+                    countryProducts.forEach(product => {
+                        product.countries.forEach(country => {
+                            const countryName = country.country_name;
+                            if (!groupedCountryProducts[countryName]) {
+                                groupedCountryProducts[countryName] = [];
+                            }
+                            groupedCountryProducts[countryName].push(product);
+                        });
+                    });
+                    console.log('Grouped country products:', groupedCountryProducts);
+                    setCountriesProducts(groupedCountryProducts);
+
+
+                    // Group global products
+                    const groupedGlobalProducts = {
+                        true: globalPlanProducts.filter(product => product.global_plan === true),
+                        //false: globalPlanProducts.filter(product => product.global_plan === false),
+                    };
+                    console.log('Grouped global products:', groupedGlobalProducts);
+                    setGlobalPlanProducts(groupedGlobalProducts);
+                        
+                    }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
+    
+
+    // useEffect(() => {
+    //     // Categorize products based on the isRegional property
+    //     const regionalProducts = products.filter(product => product.isRegional);
+    //     const nonRegionalProducts = products.filter(product => !product.isRegional);
+
+    //     setRegionalProducts(regionalProducts);
+    //     //setNonRegionalProducts(nonRegionalProducts);
+    // }, [products]);
+
+    // useEffect(() => {
+    //     // Fetch data from the API with authorization
+    //     const fetchProducts = async () => {
+    //         try {
+    //             const authToken = await getAuthToken(); // Call the getAuthToken function
+    //             const response = await fetch(API_URL, {
+    //                 headers: {
+    //                     Authorization: `${authToken}`,
+    //                 },
+    //             });
+
+    //             const data = await response.json();
+    //             console.log(data);
+    //             if (data.code === 200) {
+    //                 setProducts(data.data);
+    //             } else {
+    //                 console.error('Error fetching products:', data.message);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching products:', error);
+    //         }
+    //     };
+
+    //     fetchProducts();
+    // }, []);
+
+    
+    const imageUrls = [
+        process.env.PUBLIC_URL + '/images/airport.jpg',
+        process.env.PUBLIC_URL + '/images/wordl.jpg',
+        process.env.PUBLIC_URL + '/images/world2.jpg',
+    ];
+
+    const handleSearch = (searchTerm) => {
+        // Implement your search logic here (e.g., filter products based on searchTerm)
+        console.log(`Searching for: ${searchTerm}`);
+    };
+
+
+    return (
+        
+        <div className='app'>
+
+            <Header />
+                <Slider 
+                    imageUrls={imageUrls} 
+                    heading="Welcome to e-Sim Store"
+                    subheading="Explore Our e-Sim Services around the world"
+                />
+                <SearchBar onSearch={handleSearch} />
+                {/* <ProductList products={products} /> */}
+
+            <div>
+                {/* Tabs */}
+                <div>
+                    <button onClick={() => setActiveTab('countries')}>Countries eSim plans</button>
+                    <button onClick={() => setActiveTab('regions')}>Regions eSim plans</button>
+                    <button onClick={() => setActiveTab('global')}>Global eSim Plans</button>
+                </div>
+
+                <div className="grid-container">
+                    {activeTab === 'countries' && (
+                        <div>
+                            <h1>Countries</h1>
+                            <div className="row">
+                                <div className="product-grid">
+                                    {Object.keys(countriesProducts).length > 0 ? (
+                                        <>
+                                            {Object.keys(countriesProducts)
+                                                .sort()
+                                                .map((countryName) => (
+                                                    <div key={countryName}>
+                                                        <Accordion
+                                                            expanded={openAccordion === countryName}
+                                                            onChange={() => handleAccordionClick(countryName)}
+                                                        >
+                                                            <AccordionSummary
+                                                                expandIcon={<ExpandMoreIcon />}
+                                                                aria-controls={`${countryName}-content`}
+                                                                id={`${countryName}-header`}
+                                                            >
+                                                                <Typography>{countryName}</Typography>
+                                                            </AccordionSummary>
+                                                        </Accordion>
+                                                    </div>
+                                                ))
+                                                .slice(0, displayedProductsCount)} {/* Display products up to displayedProductsCount */}
+                                        </>
+                                    ) : (
+                                        <p>No country products found.</p>
+                                    )}
+                                </div>
+                                {openAccordion && (
+                                    <div>
+                                        <Grid container spacing={2}>
+                                            {countriesProducts[openAccordion].slice(0, displayedProductsCount).map((product) => (
+                                                <Grid item key={product.id} xs={12} sm={6} md={4}>
+                                                    <Card>
+                                                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                                                            <Typography variant="h6" style={{ marginBottom: '10px' }}>
+                                                                {product.name}
+                                                                <hr />
+                                                            </Typography>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                                                <div>
+                                                                    <Typography>
+                                                                        <LanguageIcon fontSize="small" style={{ verticalAlign: 'middle', marginRight: '10px' }} />
+                                                                        {product.data} GB
+                                                                    </Typography>
+                                                                </div>
+                                                                <div style={{ backgroundColor: '#0056b3', color: 'white', padding: '5px 10px', borderRadius: '5px' }}>
+                                                                    ${product.price}
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <Typography style={{ display: 'flex', alignItems: 'center', marginRight: '10px' }}>
+                                                                Internet Traffic
+                                                            </Typography>
+                                                            <Typography style={{ display: 'flex', alignItems: 'center' }}>
+                                                                <LanguageIcon fontSize="small" style={{ verticalAlign: 'middle', marginRight: '10px' }} />
+                                                                {product.validity} Days
+                                                                <Link to={`/products/${product.id}`} style={{ marginLeft: 'auto' }}>
+                                                                    <Button 
+                                                                        variant="outlined"
+                                                                        color="primary"
+                                                                        size="small"
+                                                                        style={{ marginLeft: 'auto' }}
+                                                                    >
+                                                                        View Product
+                                                                    </Button>
+                                                                </Link>
+                                                            </Typography>
+                                                            <Typography style={{ display: 'flex', alignItems: 'center', marginRight: '10px' }}>
+                                                                Duration
+                                                            </Typography>
+                                                        </CardContent>
+                                                        <div className="add-to-cart-button" style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
+                                                            <button>Add to Cart</button>
+                                                        </div>
+                                                    </Card>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </div>
+                                )}
+                            </div>
+                            {Object.keys(countriesProducts).length > displayedProductsCount && (
+                                <div className="load-more-button">
+                                    <button onClick={() => setDisplayedProductsCount(displayedProductsCount + ITEMS_PER_PAGE)}>
+                                        View More
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+
+                {activeTab === 'regions' && (
+                    <div>
+                        <h1>Regions</h1>
+                        {/* Your regional products display code */}
+                        {Object.keys(regionsProducts).length > 0 ? (
+                            <ul>
+                                {Object.entries(regionsProducts).map(([regionName, products]) => (
+                                    <li key={regionName}>
+                                        <Accordion>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon />}
+                                                aria-controls={`${regionName}-content`}
+                                                id={`${regionName}-header`}
+                                            >
+                                                <Typography>{regionName}</Typography>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                                <ul>
+                                                    {products.map(product => (
+                                                        <li key={product.id}>
+                                                            <p>Name: {product.name}</p>
+                                                            <p>Price: {product.price}</p>
+                                                            <p>Data: {product.data}</p>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </AccordionDetails>
+                                        </Accordion>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No regional products found.</p>
+                        )}
+                    </div>
+                )}
+
+                {activeTab === 'global' && (
+                    <div>
+                    <h1>Global Plans</h1>
+                    {Object.keys(globalPlanProducts).length > 0 ? (
+                        <ul>
+                            {Object.entries(globalPlanProducts).map(([planName, products]) => (
+                                <li key={planName}>
+                                    <Accordion>
+                                        {/* <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls={`${planName}-content`}
+                                            id={`${planName}-header`}
+                                        >
+                                            <Typography>{planName}</Typography>
+                                        </AccordionSummary> */}
+                                        <AccordionDetails>
+                                            <ul>
+                                                {products.map(product => (
+                                                    <li key={product.id}>
+                                                        <p>Name: {product.name}</p>
+                                                        <p>Price: {product.price}</p>
+                                                        <p>Data: {product.data}</p>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No global plan products found.</p>
+                    )}
+                    </div>
+                )}
+            </div>
+
+            <Routes>
+                <Route path="/products" element={<ProductPage />} />
+                <Route path="/products/:productId" element={<SingleProductPage />} />
+            </Routes>
+
+            <Footer />
+            
+            
+        </div>
+        
+    )
+}
+
+
+
+
+export default App

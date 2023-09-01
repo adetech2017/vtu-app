@@ -1,0 +1,60 @@
+/* components/common/Header.css */
+
+.header {
+    background-color: #f2f2f2;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav {
+    margin-left: 16px;
+}
+
+.navList {
+    list-style-type: none;
+    display: flex;
+}
+
+.navItem {
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.checkout-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Adjust margin as needed */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        margin-bottom: 16px;
+    }
+
+    .nav {
+        margin-left: 0;
+    }
+
+    .navList {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navItem {
+        margin: 8px 0;
+    }
+}
