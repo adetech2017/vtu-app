@@ -26,12 +26,14 @@ const CountriesComponent = ({
                         {Object.keys(countriesProducts)
                             .sort()
                             .map((countryName) => (
-                            <AccordionComponent
-                                key={countryName}
-                                countryName={countryName}
-                                openAccordion={openAccordion}
-                                handleAccordionClick={handleAccordionClick}
-                            />
+                            <div key={countryName} className="country-card">
+                                <AccordionComponent
+                                    key={countryName}
+                                    countryName={countryName}
+                                    openAccordion={openAccordion}
+                                    handleAccordionClick={handleAccordionClick}
+                                />
+                            </div>
                             ))
                             .slice(0, displayedProductsCount)} {/* Display products up to displayedProductsCount */}
                         </>
@@ -40,17 +42,20 @@ const CountriesComponent = ({
                     )}
                 </div>
                 {openAccordion && (
-                <div>
+                <div className="row">
                     <Grid container spacing={2}>
-                    {countriesProducts[openAccordion].slice(0, displayedProductsCount).map((product) => (
-                        <Grid item key={product.id} xs={12} sm={6} md={4}>
-                            <ProductCardComponent product={product} addToCart={addToCart} cartItems={cartItems} />
-                        </Grid>
-                    ))}
+                        {countriesProducts[openAccordion].slice(0, displayedProductsCount).map((product) => (
+                            <Grid item key={product.id} xs={12} sm={6} md={4}>
+                                <ProductCardComponent product={product} addToCart={addToCart} cartItems={cartItems} />
+                            </Grid>
+                        ))}
                     </Grid>
                 </div>
-                )}
+            )}
             </div>
+            
+            
+
             {Object.keys(countriesProducts).length > displayedProductsCount && (
                 <div className="load-more-button">
                 <button onClick={() => setDisplayedProductsCount(displayedProductsCount + ITEMS_PER_PAGE)}>
