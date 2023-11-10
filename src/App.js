@@ -9,8 +9,8 @@ import SingleProductPage from './components/SingleProductPage';
 import CheckoutPage from './components/CheckoutPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { CartProvider } from '../src/components/CartContext';
+import SuccessPage from './components/SuccessPage'; 
 
 
 const App = () => {
@@ -25,6 +25,11 @@ const App = () => {
     const [displayedProductsCount, setDisplayedProductsCount] = useState(ITEMS_PER_PAGE);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
+    const [completeOrderData, setCompleteOrderData] = useState(null);
+
+    const addToCart = (product) => {
+        setCartItems((prevCartItems) => [...prevCartItems, product]);
+    };
 
     const removeFromCart = (productId) => {
         setCartItems(prevCartItems => prevCartItems.filter(item => item.id !== productId));
@@ -60,6 +65,7 @@ const App = () => {
 
             const responseData = await response.json();
             console.log('API response:', responseData);
+            console.log(process.env.FLW_SECRET_KEY);
 
             if (responseData.code === 200 && Array.isArray(responseData.data)) {
                 const regionalProducts = responseData.data.filter(product => product.isRegional);
@@ -135,35 +141,38 @@ const App = () => {
 
 
     return (
-        <>
-            <Header cartItems={cartItems} removeFromCart={removeFromCart} onSearch={handleSearch} />
-            <Routes>
-                <Route
-                    path='/'
-                    element={
-                    <HomeComponent
-                        addToCart={handleAddToCart}
-                        activeTab={activeTab}
-                        setActiveTab={setActiveTab}
-                        countriesProducts={countriesProducts}
-                        displayedProductsCount={displayedProductsCount}
-                        openAccordion={openAccordion}
-                        handleAccordionClick={handleAccordionClick}
-                        setDisplayedProductsCount={setDisplayedProductsCount}
-                        regionsProducts={regionsProducts}
-                        globalPlanProducts={globalPlanProducts}
-                        handleSearch={handleSearch}
-                        cartItems={cartItems}
-                        filteredProducts={filteredProducts}
+        <CartProvider addToCart={addToCart} removeFromCart={removeFromCart}>
+            <>
+                <Header removeFromCart={removeFromCart} onSearch={handleSearch} />
+                <Routes>
+                    <Route
+                        path='/'
+                        element={
+                        <HomeComponent
+                            addToCart={handleAddToCart}
+                            activeTab={activeTab}
+                            setActiveTab={setActiveTab}
+                            countriesProducts={countriesProducts}
+                            displayedProductsCount={displayedProductsCount}
+                            openAccordion={openAccordion}
+                            handleAccordionClick={handleAccordionClick}
+                            setDisplayedProductsCount={setDisplayedProductsCount}
+                            regionsProducts={regionsProducts}
+                            globalPlanProducts={globalPlanProducts}
+                            handleSearch={handleSearch}
+                            cartItems={cartItems}
+                            filteredProducts={filteredProducts}
+                        />
+                        }
                     />
-                    }
-                />
-                <Route path='/products/:productId' element={<SingleProductPage />} />
-                <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} />} />
-            </Routes>
-            <Footer />
-            <ToastContainer />
-        </>
+                    <Route path='/products/:productId' element={<SingleProductPage />} />
+                    <Route path="/checkout" element={<CheckoutPage cartItems={cartItems} onCompleteOrder={setCompleteOrderData} />} />
+                    <Route path="/success" element={<SuccessPage completeOrderData={completeOrderData} />} />
+                </Routes>
+                <Footer />
+                <ToastContainer />
+            </>
+        </CartProvider>
     );
 }
 

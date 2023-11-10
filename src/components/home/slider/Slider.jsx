@@ -1,6 +1,5 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import './Slider.css';
-//import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 
 
@@ -8,26 +7,22 @@ import './Slider.css';
 const Slider = ({imageUrls, heading, subheading}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
-    const handleNextSlide = () => {
+    // Define handleNextSlide using useCallback
+    const handleNextSlide = useCallback(() => {
         setCurrentSlide((prevSlide) => (prevSlide + 1) % imageUrls.length);
-    };
+    }, [imageUrls.length]);
 
-    const handlePrevSlide = () => {
-        setCurrentSlide((prevSlide) => (prevSlide - 1 + imageUrls.length) % imageUrls.length);
-    };
-    
     useEffect(() => {
         // Auto-scroll every 5 seconds
         const interval = setInterval(() => {
             handleNextSlide();
         }, 5000);
-    
+
         // Clean up the interval when the component is unmounted
         return () => clearInterval(interval);
-    }, [currentSlide]);
-    
-    
-    
+    }, [currentSlide, handleNextSlide]);
+
+
 
     return (
         <div className="slider-container">

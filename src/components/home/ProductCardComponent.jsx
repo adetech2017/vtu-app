@@ -4,12 +4,14 @@ import LanguageIcon from '@mui/icons-material/Language';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCart } from '../CartContext';
 
 
 
 
+const ProductCardComponent = ({ product }) => {
 
-const ProductCardComponent = ({ product, addToCart, cartItems }) => {
+    const { cartItems, addToCart } = useCart();
 
 
     const handleAddToCart = () => {
@@ -67,8 +69,13 @@ const ProductCardComponent = ({ product, addToCart, cartItems }) => {
                 </Typography>
             </CardContent>
             <div className="add-to-cart-button" style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
-                <Button variant="contained" color="primary" onClick={handleAddToCart}>
-                    Add to Cart
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={handleAddToCart}
+                    disabled={cartItems.some(item => item.id === product.id)}
+                >
+                    {cartItems.some(item => item.id === product.id) ? 'In Cart' : 'Add to Cart'}
                 </Button>
             </div>
         </Card>

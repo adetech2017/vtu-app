@@ -12,6 +12,8 @@ const countryFlagMapping = {
     Australia: '/assets/flags/au.png',
     Austria: '/assets/flags/au.png',
     Azerbaijan: '/assets/flags/az.png',
+    'Aland Islands': '/assets/flags/ax.png',
+    'Antigua And Barbuda': '/assets/flags/ag.png',
 
 
     Bahamas: '/assets/flags/bs.png',
@@ -24,7 +26,7 @@ const countryFlagMapping = {
     Benin: '/assets/flags/bj.png',
     Bhutan: '/assets/flags/bt.png',
     Bolivia: '/assets/flags/bo.png',
-    Bosnia_and_Herzegovina: '/assets/flags/ba.png',
+    'Bosnia and Herzegovina': '/assets/flags/ba.png',
     Botswana: '/assets/flags/bw.png',
     Brazil: '/assets/flags/br.png',
     Brunei: '/assets/flags/bn.png',
@@ -37,75 +39,81 @@ const countryFlagMapping = {
     Cameroon: '/assets/flags/cm.png',
     Canada: '/assets/flags/ca.png',
     Cape_Verde: '/assets/flags/cv.png',
-    Central_African_Republic: '/assets/flags/cf.png',
+    'Central African Republic': '/assets/flags/cf.png',
     Chad: '/assets/flags/td.png',
     Chile: '/assets/flags/cl.png',
     China: '/assets/flags/cn.png',
     Colombia: '/assets/flags/co.png',
     Comoros: '/assets/flags/km.png',
     Congo: '/assets/flags/cd.png',
-    Costa_Rica: '/assets/flags/cr.png',
+    'Costa Rica': '/assets/flags/cr.png',
     Croatia: '/assets/flags/hr.png',
     Cuba: '/assets/flags/cu.png',
     Cyprus: '/assets/flags/cy.png',
-    Czech_Republic: '/assets/flags/cz.png',
+    'Czech Republic': '/assets/flags/cz.png',
 
 
-    Democratic_Republic_of_the_Congo: '/assets/flags/cd.png',
+    'Democratic Republic of the Congo': '/assets/flags/cd.png',
     Denmark: '/assets/flags/dk.png',
     Djibouti: '/assets/flags/dj.png',
     Dominica: '/assets/flags/dm.png',
-    Dominican_Republic: '/assets/flags/do.png',
+    'Dominican Republic': '/assets/flags/do.png',
 
 
-    East_Timor: '/assets/flags/east_timor.png',
+    'East Timor': '/assets/flags/tl.png',
     Ecuador: '/assets/flags/ec.png',
     Egypt: '/assets/flags/eg.png',
-    El_Salvador: '/assets/flags/sv.png',
-    Equatorial_Guinea: '/assets/flags/gq.png',
+    'El Salvador': '/assets/flags/sv.png',
+    'Equatorial Guinea': '/assets/flags/gq.png',
     Eritrea: '/assets/flags/er.png',
     Estonia: '/assets/flags/ee.png',
-    Eswatini: '/assets/flags/sz.png',
+    Swaziland: '/assets/flags/sz.png',
     Ethiopia: '/assets/flags/et.png',
 
 
     Fiji: '/assets/flags/fj.png',
     Finland: '/assets/flags/fi.png',
-    France: '/assets/flags/fr.png', // Already included in the previous list
+    France: '/assets/flags/fr.png', 
 
 
+    Gibraltar: '/assets/flags/gi.png',
     Gabon: '/assets/flags/ga.png',
     Gambia: '/assets/flags/gm.png',
     Georgia: '/assets/flags/ge.png',
-    Germany: '/assets/flags/de.png', // Already included in the previous list
+    Germany: '/assets/flags/de.png',
     Ghana: '/assets/flags/gh.png',
     Greece: '/assets/flags/gr.png',
     Grenada: '/assets/flags/gd.png',
     Guatemala: '/assets/flags/gt.png',
     Guinea: '/assets/flags/gn.png',
-    Guinea_Bissau: '/assets/flags/gw.png',
+    'Guinea-Bissau': '/assets/flags/gw.png',
     Guyana: '/assets/flags/gy.png',
+    'Guernsey and Alderney': '/assets/flags/gg.png',
+    Guam: '/assets/flags/gu.png',
+    Greenland: '/assets/flags/gl.png',
 
 
     Haiti: '/assets/flags/ht.png',
     Honduras: '/assets/flags/hn.png',
     Hungary: '/assets/flags/hu.png',
+    'Hong Kong S.A.R.': '/assets/flags/hk.png',
 
 
     Iceland: '/assets/flags/is.png',
-    India: '/assets/flags/in.png', // Already included in the previous list
+    India: '/assets/flags/in.png',
     Indonesia: '/assets/flags/id.png',
     Iran: '/assets/flags/ir.png',
     Iraq: '/assets/flags/iq.png',
     Ireland: '/assets/flags/ie.png',
     Israel: '/assets/flags/il.png',
-    Italy: '/assets/flags/it.png', // Already included in the previous list
-    Ivory_Coast: '/assets/flags/ci.png',
+    Italy: '/assets/flags/it.png', 
+    'Cote D\'Ivoire (Ivory Coast)': '/assets/flags/ci.png',
 
 
     Jamaica: '/assets/flags/jm.png',
-    Japan: '/assets/flags/jp.png', // Already included in the previous list
+    Japan: '/assets/flags/jp.png',
     Jordan: '/assets/flags/jo.png',
+    Jersey: '/assets/flags/je.png',
 
 
     Kazakhstan: '/assets/flags/kz.png',
@@ -133,7 +141,7 @@ const countryFlagMapping = {
     Maldives: '/assets/flags/mv.png',
     Mali: '/assets/flags/ml.png',
     Malta: '/assets/flags/mt.png',
-    Marshall_Islands: '/assets/flags/mh.png',
+    'Marshall Islands': '/assets/flags/mh.png',
     Mauritania: '/assets/flags/mr.png',
     Mauritius: '/assets/flags/mu.png',
     Mexico: '/assets/flags/mx.png',
@@ -145,18 +153,20 @@ const countryFlagMapping = {
     Morocco: '/assets/flags/ma.png',
     Mozambique: '/assets/flags/mz.png',
     Myanmar: '/assets/flags/mm.png',
+    'Man (Isle of)': '/assets/flags/im.png',
+    'Macau S.A.R.': '/assets/flags/mo.png',
 
 
     Namibia: '/assets/flags/na.png',
     Nauru: '/assets/flags/nr.png',
     Nepal: '/assets/flags/np.png',
     Netherlands: '/assets/flags/nl.png',
-    New_Zealand: '/assets/flags/nz.png',
+    'New Zealand': '/assets/flags/nz.png',
     Nicaragua: '/assets/flags/ni.png',
     Niger: '/assets/flags/ne.png',
     Nigeria: '/assets/flags/ng.png',
-    North_Korea: '/assets/flags/kp.png',
-    North_Macedonia: '/assets/flags/mk.png',
+    'North Korea': '/assets/flags/kp.png',
+    'North Macedonia': '/assets/flags/mk.png',
     Norway: '/assets/flags/no.png',
 
 
@@ -167,7 +177,7 @@ const countryFlagMapping = {
     Palau: '/assets/flags/pw.png',
     Palestine: '/assets/flags/ps.png',
     Panama: '/assets/flags/pa.png',
-    Papua_New_Guinea: '/assets/flags/pg.png',
+    'Papua New Guinea': '/assets/flags/pg.png',
     Paraguay: '/assets/flags/py.png',
     Peru: '/assets/flags/pe.png',
     Philippines: '/assets/flags/ph.png',
@@ -175,22 +185,23 @@ const countryFlagMapping = {
     Portugal: '/assets/flags/pt.png',
 
 
-    Qatar: '/assets/flags/qatar.png',
+    Qatar: '/assets/flags/qa.png',
 
 
-    Republic_of_the_Congo: '/assets/flags/cg.png',
+    'Republic of the Congo': '/assets/flags/cg.png',
     Romania: '/assets/flags/ro.png',
     Russia: '/assets/flags/ru.png',
     Rwanda: '/assets/flags/rw.png',
+    Reunion: '/assets/flags/re.png',
 
 
-    Saint_Kitts_and_Nevis: '/assets/flags/kn.png',
-    Saint_Lucia: '/assets/flags/lc.png',
-    Saint_Vincent_and_the_Grenadines: '/assets/flags/vc.png',
+    'Saint Kitts and Nevis': '/assets/flags/kn.png',
+    'Saint Lucia': '/assets/flags/lc.png',
+    'Saint Vincent and the Grenadines': '/assets/flags/vc.png',
     Samoa: '/assets/flags/ws.png',
-    San_Marino: '/assets/flags/sm.png',
-    Sao_Tome_and_Principe: '/assets/flags/st.png',
-    Saudi_Arabia: '/assets/flags/sa.png',
+    'San Marino': '/assets/flags/sm.png',
+    'Sao Tome and Principe': '/assets/flags/st.png',
+    'Saudi Arabia': '/assets/flags/sa.png',
     Senegal: '/assets/flags/sn.png',
     Serbia: '/assets/flags/rs.png',
     Seychelles: '/assets/flags/sc.png',
@@ -198,28 +209,29 @@ const countryFlagMapping = {
     Singapore: '/assets/flags/sg.png',
     Slovakia: '/assets/flags/sk.png',
     Slovenia: '/assets/flags/si.png',
-    Solomon_Islands: '/assets/flags/sb.png',
+    'Solomon Islands': '/assets/flags/sb.png',
     Somalia: '/assets/flags/so.png',
-    South_Africa: '/assets/flags/za.png',
-    South_Korea: '/assets/flags/kr.png',
-    South_Sudan: '/assets/flags/ss.png',
-    Spain: '/assets/flags/es.png', // Already included in the previous list
-    Sri_Lanka: '/assets/flags/lk.png',
+    'South Africa': '/assets/flags/za.png',
+    'South Korea': '/assets/flags/kr.png',
+    'South Sudan': '/assets/flags/ss.png',
+    Spain: '/assets/flags/es.png',
+    'Sri Lanka': '/assets/flags/lk.png',
     Sudan: '/assets/flags/sd.png',
     Suriname: '/assets/flags/sr.png',
     Sweden: '/assets/flags/se.png',
     Switzerland: '/assets/flags/ch.png',
     Syria: '/assets/flags/sy.png',
+    'South Georgia': '/assets/flags/gs.png',
 
 
     Taiwan: '/assets/flags/tw.png',
     Tajikistan: '/assets/flags/tj.png',
     Tanzania: '/assets/flags/tz.png',
     Thailand: '/assets/flags/th.png',
-    Timor_Leste: '/assets/flags/tl.png',
+    'Timor Leste': '/assets/flags/tl.png',
     Togo: '/assets/flags/tg.png',
     Tonga: '/assets/flags/to.png',
-    Trinidad_and_Tobago: '/assets/flags/tt.png',
+    'Trinidad and Tobago': '/assets/flags/tt.png',
     Tunisia: '/assets/flags/tn.png',
     Turkey: '/assets/flags/tr.png',
     Turkmenistan: '/assets/flags/tm.png',
@@ -228,15 +240,15 @@ const countryFlagMapping = {
 
     Uganda: '/assets/flags/ug.png',
     Ukraine: '/assets/flags/ua.png',
-    United_Arab_Emirates: '/assets/flags/ae.png',
-    United_Kingdom: '/assets/flags/gb-eng.png',
-    United_States: '/assets/flags/us.png', // Already included in the previous list
+    'United Arab Emirates': '/assets/flags/ae.png',
+    'United Kingdom': '/assets/flags/gb-eng.png',
+    'United States': '/assets/flags/us.png', 
     Uruguay: '/assets/flags/uy.png',
     Uzbekistan: '/assets/flags/uz.png',
 
 
     Vanuatu: '/assets/flags/vu.png',
-    Vatican_City: '/assets/flags/va.png',
+    'Vatican City': '/assets/flags/va.png',
     Venezuela: '/assets/flags/ve.png',
     Vietnam: '/assets/flags/vn.png',
 

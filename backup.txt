@@ -25,6 +25,78 @@ import ProductPage from './components/ProductPage';
 
 
 
+====================================================================================
+{currentStep === 3 && (
+                        <div className="confirm-order">
+                            <h2>Step 3: Confirm Order</h2>
+                            {/* Order confirmation details */}
+                            
+                            <div className='row'>
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label className='form-label' htmlFor="cardName">Cardholder Name:</label>
+                                        <input
+                                            type="text"
+                                            id="cardName"
+                                            name="cardName"
+                                            placeholder="Cardholder Name"
+                                            required
+                                            className='form-control'
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="form-group">
+                                        <label className='form-label' htmlFor="cardNumber">Card Number:</label>
+                                        <input
+                                            type="text"
+                                            id="cardNumber"
+                                            name="cardNumber"
+                                            placeholder="Card Number"
+                                            required
+                                            className='form-control'
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className="col-md-3">
+                                    <div className="form-group">
+                                        <label className='form-label' htmlFor="cardExpiry">Expiration Date:</label>
+                                        <input
+                                            type="text"
+                                            id="cardExpiry"
+                                            name="cardExpiry"
+                                            placeholder="MM/YY"
+                                            required
+                                            className='form-control'
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="form-group">
+                                        <label className='form-label' htmlFor="cardCvc">CVV:</label>
+                                        <input
+                                            type="text"
+                                            id="cardCvc"
+                                            name="cardCvc"
+                                            placeholder="CVV"
+                                            required
+                                            className='form-control'
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='card-body'>
+                                <button className='btn btn-secondary' onClick={handlePrevStep}>Previous</button>
+                                <button className='btn btn-info' onClick={handlePlaceOrder}>Place Order</button>
+                                
+                            </div>
+                        </div>
+                    )}
+
+
+
 
 const API_URL = 'https://sandbox.worldroambuddy.com:3001/api/v1/products/all';
 

@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import getAuthToken from '../apiAuth';
 import './SingleProductPage.css';
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMoreRounded';
 import countryFlagMapping from './countryFlagMapping';
+//import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useCart } from './CartContext';
 
 
 
-
-const SingleProductPage = ( addToCart, cartItems) => {
+const SingleProductPage = ( ) => {
     const { productId } = useParams();
     const [productDetails, setProductDetails] = useState(null);
-    const [quantity, setQuantity] = useState(1);
-    //const [cartItems, setCartItems] = useState([]);
+    const [quantity] = useState(1);
+    const { addToCart } = useCart();
+
+    const navigate = useNavigate(); 
 
 
     useEffect(() => {
@@ -31,7 +35,7 @@ const SingleProductPage = ( addToCart, cartItems) => {
             }
 
             const productData = await response.json();
-            console.log('Product details', productData);
+            
             setProductDetails(productData.data);
         } catch (error) {
             console.error('Error fetching product details:', error);
@@ -42,25 +46,36 @@ const SingleProductPage = ( addToCart, cartItems) => {
     }, [productId]);
 
 
+    // const handleAddToCart = () => {
+    //     if (productDetails) {
+    //         addToCart(productDetails); // Use addToCart function from the context
+    //         toast.success(`${productDetails.name} added to cart`);
+    //     }
+    // };
+
+
 
 
     const handleBuyNow = () => {
-        addToCart(productDetails);
-        // Implement navigation to checkout or any other desired action
+        if (productDetails) {
+            addToCart(productDetails);
+            
+            navigate('/checkout');
+        }
     };
 
-    const handleQuantityChange = (event) => {
-        const newQuantity = parseInt(event.target.value, 10);
-        setQuantity(newQuantity);
-    };
+    // const handleQuantityChange = (event) => {
+    //     const newQuantity = parseInt(event.target.value, 10);
+    //     setQuantity(newQuantity);
+    // };
 
     // State to manage the accordion open/close state
-    const [isAccordionOpen, setAccordionOpen] = useState(false);
+    //const [isAccordionOpen, setAccordionOpen] = useState(false);
 
     // Function to toggle the accordion
-    const toggleAccordion = () => {
-        setAccordionOpen(!isAccordionOpen);
-    };
+    // const toggleAccordion = () => {
+    //     setAccordionOpen(!isAccordionOpen);
+    // };
 
 
     return (
@@ -113,10 +128,10 @@ const SingleProductPage = ( addToCart, cartItems) => {
                     <h3>Works in</h3>
                     <div className="workin-container">
                         {productDetails && productDetails.countries.length > 0 ? (
-                            <div className="countries-row">
+                            <div className="workin-countries-row">
                                 {productDetails.countries.map((country) => (
-                                    <div className="country-card" key={country.id}>
-                                        {country.country_name} 
+                                    <div className="workin-country-card" key={country.id}>
+                                        {country.country_name}&nbsp;
                                         <img
                                             src={countryFlagMapping[country.country_name]}
                                             alt={country.country_name}
@@ -129,10 +144,6 @@ const SingleProductPage = ( addToCart, cartItems) => {
                             <p>No countries available.</p>
                         )}
                     </div>
-                </div>
-
-                <div className="countries-list">
-                    
                 </div>
             </div>
             
@@ -150,7 +161,7 @@ const SingleProductPage = ( addToCart, cartItems) => {
                                 </tr>
                                 <tr>
                                     <td style={{ fontWeight: 'bold', fontSize: '16px', textAlign: 'left'}}>{productDetails.planType} x 1</td>
-                                    <td> </td>
+                                    <td></td>
                                     <td style={{ color: 'green', fontWeight: 'bold', fontSize: '22px'}}>Free</td>
                                 </tr>
                                 <tr>
@@ -158,7 +169,7 @@ const SingleProductPage = ( addToCart, cartItems) => {
                                 </tr>
                                 <tr>
                                     <td style={{ fontWeight: 'bold', fontSize: '16px', textAlign: 'left'}}>Total</td>
-                                    <td> </td>
+                                    <td></td>
                                     <td style={{ color: 'green', fontWeight: 'bold', fontSize: '22px'}}>${quantity * productDetails.price}</td>
                                 </tr>
                                 <tr>
@@ -166,9 +177,11 @@ const SingleProductPage = ( addToCart, cartItems) => {
                                 </tr>
                             </tbody>
                         </table>
-                        <button className="buy-now-button" onClick={handleBuyNow} style={{ width: '100%' }}>
-                            Buy Now
-                        </button>
+                        <Link to="/checkout">
+                            <button className="buy-now-button" onClick={handleBuyNow} style={{ width: '100%' }}>
+                                Buy Now
+                            </button>
+                        </Link>
                     </div>
                 )}
 
@@ -196,7 +209,7 @@ const SingleProductPage = ( addToCart, cartItems) => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <p>
-                            Yes! With dual-SIM functionality you can have both your physical SIM and eSIM active at the same time.
+                                Yes! With dual-SIM functionality you can have both your physical SIM and eSIM active at the same time.
                             </p>
                         </AccordionDetails>
                     </Accordion>

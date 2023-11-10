@@ -37,6 +37,21 @@
 }
 
 
+.workin-countries-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.workin-country-card {
+    width: calc(25% - 10px); /* 25% for 4 in a row, minus some margin */
+    margin: 5px; /* Add some margin for spacing */
+    text-align: center;
+}
+
+
+
+
 
 /* Add more specific styling as needed for your content */
 /* Update your CSS file (styles.css) or create a new CSS file for this component */

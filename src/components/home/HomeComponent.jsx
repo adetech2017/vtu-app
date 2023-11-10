@@ -9,7 +9,6 @@ import GlobalPlansComponent from './GlobalPlansComponent';
 
 
 
-
 const HomeComponent = ({
     activeTab,
     setActiveTab,

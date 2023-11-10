@@ -1,31 +1,164 @@
+/* Styling for the main checkout page container */
 .checkout-page {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
-
-.checkout-content {
-    display: flex;
+    justify-content: space-between;
     align-items: flex-start;
-}
-
-.checkout-steps {
-    flex: 1;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
+    height: 100vh;
 }
 
-.product-details {
-    flex: 1;
+/* Styling for the left container with shipping information */
+.shipping-info {
+    flex: 9;
     padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
 }
 
-/* Add more styling as needed */
+.shipping-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Styling for the right container with cart details */
+.cart-details {
+    flex: 3;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.cart-details h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Styling for the cart table */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th, .cart-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.cart-table th {
+    background-color: #f7f7f7;
+}
+
+/* Styling for the remove button */
+.remove-button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #d94141;
+}
+
+/* Styling for the proceed to payment button */
+.proceed-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.proceed-button:hover {
+    background-color: #0056b3;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; /* Adjust the width as needed */
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.step {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: relative; /* Needed for positioning the step number */
+}
+
+.completed {
+    background-color: #4caf50; /* Color for completed steps */
+    color: #fff;
+}
+
+.step-number {
+    position: absolute;
+    top: 50%; /* Vertically center the step number */
+    left: 50%; /* Horizontally center the step number */
+    transform: translate(-50%, -50%);
+}
+
+.step-line {
+    height: 2px; /* Line height */
+    flex: 1; /* Take up available space */
+    background-color: #ccc;
+}
+
+.checkbox-xl .form-check-input {
+    top: 1.2rem;
+    scale: 1.7;
+    margin-right: 0.8rem;
+}
+
+.form-check {
+    margin-top: 20px; /* Adjust the margin as needed */
+    margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+
+/* Default style */
+.select-button {
+    background-color: #007bff; /* Default button background color (info) */
+    color: #fff; /* Default text color */
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+/* Selected style */
+.select-button.selected {
+    background-color: #28a745; /* Custom background color for selected button */
+    font-weight: bold; /* Make the text bold for the selected button */
+    /* Add any other custom styles for the selected button */
+}
+
+
+
+
+/* CheckoutPage.css */
+
+/* .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    margin-right: 10px; 
+} */
+
+/* Adjust spacing as needed */
+

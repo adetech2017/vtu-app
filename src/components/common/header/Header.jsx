@@ -3,13 +3,15 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import { Button, Menu, MenuItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useCart } from '../../CartContext';
 
 
 
 
 
+const Header = () => {
+    const { cartItems, removeFromCart } = useCart();
 
-const Header = ({ cartItems, removeFromCart }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleMenuOpen = (event) => {
